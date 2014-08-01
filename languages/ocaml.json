@@ -1,0 +1,14 @@
+{
+    "langage": "ocaml",
+    "format": {
+        "inline": {
+            "before": "(* ",
+            "after": " *)"
+        },
+        "multiline": {
+            "first": "(* ",
+            "while": " * ",
+            "final": " *)"
+        }
+    }
+}
