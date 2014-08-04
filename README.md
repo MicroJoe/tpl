@@ -29,7 +29,7 @@ You can add a template by creating a text file in the `templates/` directory.
 The name of the file must end with `.txt` and will be used as the template
 name (for example `my_template.txt`).
 
-This text file contains text and fields represented by double braces, like
+This text file contains text and fields surrounded by double braces, like
 `{{ year }}` ; fields will be replaced by their value during generation.
 
 Example template:
@@ -41,11 +41,10 @@ Example template:
 ## Adding your own language support
 
 You can add support for a specific language by creating a text file under the
-`languages` directory. This file is under JSON format and so must have a
+`languages/` directory. This file is under JSON format and so must have a
 `.json` extension (like `python.json`).
 
-This JSON file describes the way comments are handled in the language, based on
-the following tree:
+This JSON file describes the way comments are handled in the language:
 
     :::javascript
     {
@@ -53,7 +52,7 @@ the following tree:
         "format": {
             "inline": {
                 "before": "inline_comment_open_string",
-                "after: "inline_comment_close_string",
+                "after": "inline_comment_close_string",
             },
             "multiline": {
                 "first": "multiline_comment_open_string",
