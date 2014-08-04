@@ -1,0 +1,14 @@
+{
+    "langage": "c",
+    "format": {
+        "inline": {
+            "before": "# ",
+            "after": ""
+        },
+        "multiline": {
+            "first": "",
+            "while": "# ",
+            "final": ""
+        }
+    }
+}
