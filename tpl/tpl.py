@@ -2,7 +2,7 @@
 #
 # TPL
 # A simple template-based file creator.
-# 
+#
 # Copyright (C) Romain PORTE (MicroJoe)
 
 import sys
@@ -11,7 +11,7 @@ from os import path
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 
-from comments import load_language, comment_multiline
+from tpl.comments import load_language, comment_multiline
 
 def render_template(template_name, language_name):
     templates_path = path.join(path.dirname(__file__), 'templates')
