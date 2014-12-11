@@ -1,0 +1,28 @@
+.TH tpl 1 "2014" "" "User Manual"
+.SH NAME
+tpl \- a simple template-based file creator
+.SH SYNOPSIS
+tpl \fITEMPLATE_NAME\fR \fILANGUAGE_NAME\fR
+.SH DESCRIPTION
+Write down on stdout a template named \fITEMPLATE_NAME\fR filled with the
+matching context values and put in the form of a comment according to the
+specified \fILANGUAGE_NAME\fR programming language
+.SH NOTES
+The base program is handling only a few number of templates and languages which
+are listed below. Some languages may have the same comment format and therefore
+can be switched together because the result will stay the same (e.g, Python and
+Bash).
+.SS Availaible templates
+agpl
+.SS Availaible languages
+c, cpp, python, ocaml
+.SH AUTHOR
+Romain Porte <microjoe@mailoo.org>
+.SH COPYRIGHT
+Copyright (C) 2014 Romain Porte.
+.UR http://gnu.org/licenses/gpl.html
+License GPLv3+: GNU GPL version 3 or later
+.UE .
+.br
+This is free software: you are free to change and redistribute it.  There is NO
+WARRANTY, to the extent permitted by law.
