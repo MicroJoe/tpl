@@ -14,8 +14,12 @@ from jinja2.exceptions import TemplateNotFound
 from tpl.comments import load_language, comment_multiline
 
 
+ROOT_DIR = path.dirname(__file__)
+TEMPLATES_DIR = path.join(ROOT_DIR, 'templates')
+LANGUAGES_DIR = path.join(ROOT_DIR, 'languages')
+
+
 def render_template(template_name, language_name):
-    templates_path = path.join(path.dirname(__file__), 'templates')
 
     context = {
         'author': 'Romain PORTE (MicroJoe)',
@@ -23,22 +27,23 @@ def render_template(template_name, language_name):
         'project': 'TPL'
     }
 
-    env = Environment(loader=FileSystemLoader(templates_path))
+    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 
     try:
         template = env.get_template('{}.txt'.format(template_name))
     except TemplateNotFound:
-        print('error: template file {} not found'.format(template_name))
+        print('error: template file {} not found inside {}'
+              .format(template_name, templates_path))
         sys.exit(1)
 
     result = template.render(context)
 
     try:
-        return comment_multiline(result, load_language(language_name))
+        lang = load_language(language_name, LANGUAGES_DIR)
+        return comment_multiline(result, lang)
     except FileNotFoundError:
-        print('error: JSON description file for language {} not found'.format(
-            language_name)
-        )
+        print('error: JSON description file for language {} not found inside {}'
+              .format(language_name, LANGUAGES_DIR))
         sys.exit(1)
 
 

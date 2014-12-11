@@ -1,7 +1,9 @@
+from os import path
 import json
 
-def load_language(language_name):
-    uri = './languages/{}.json'.format(language_name)
+
+def load_language(language_name, languages_dir):
+    uri = path.join(languages_dir, '{}.json'.format(language_name))
 
     with open(uri) as f:
         language = json.load(f)
@@ -16,6 +18,7 @@ def comment_inline(text, language):
         language['format']['inline']['after']
     )
     return result
+
 
 def comment_multiline(text, language):
     middle = '\n'.join([
