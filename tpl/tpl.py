@@ -7,6 +7,7 @@
 
 import sys
 from os import path
+from datetime import datetime
 
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
@@ -23,7 +24,7 @@ def render_template(template_name, language_name):
 
     context = {
         'author': 'Romain PORTE (MicroJoe)',
-        'year': 2014,
+        'year': datetime.now().year,
         'project': 'TPL'
     }
 
@@ -33,7 +34,7 @@ def render_template(template_name, language_name):
         template = env.get_template('{}.txt'.format(template_name))
     except TemplateNotFound:
         print('error: template file {} not found inside {}'
-              .format(template_name, templates_path))
+              .format(template_name, TEMPLATES_DIR))
         sys.exit(1)
 
     result = template.render(context)
