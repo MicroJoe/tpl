@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='tpl',
-    version='0.1.0',
+    version='0.1.1',
 
     url='http://microjoe.eu/',
 
@@ -11,7 +11,10 @@ setup(
     author_email='microjoe@mailoo.org',
 
     packages=['tpl'],
+
     include_package_data=True,
+    package_data={'tpl': ['templates/*.txt', 'languages/*.json']},
+
 
     scripts=['bin/tpl'],
 

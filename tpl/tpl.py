@@ -13,6 +13,7 @@ from jinja2.exceptions import TemplateNotFound
 
 from tpl.comments import load_language, comment_multiline
 
+
 def render_template(template_name, language_name):
     templates_path = path.join(path.dirname(__file__), 'templates')
 
@@ -40,13 +41,10 @@ def render_template(template_name, language_name):
         )
         sys.exit(1)
 
+
 def usage():
     print('usage: tpl <template_name> <language_name>')
 
-if __name__ == '__main__':
 
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(1)
-
+def run(*args, **kwargs):
     print(render_template(sys.argv[1], sys.argv[2]))
