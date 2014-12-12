@@ -1,0 +1,14 @@
+{
+    "langage": "erlang",
+    "format": {
+        "inline": {
+            "before": "% ",
+            "after": ""
+        },
+        "multiline": {
+            "first": "",
+            "while": "% ",
+            "final": ""
+        }
+    }
+}
