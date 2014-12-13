@@ -70,7 +70,11 @@ def usage():
     print('usage: tpl <template_name> <language_name>')
 
 
-def run(*args, **kwargs):
+def main():
+
+    if len(sys.argv) < 3:
+        usage()
+        sys.exit(1)
 
     try:
         with open(USER_CONFIG) as f:
@@ -82,3 +86,6 @@ def run(*args, **kwargs):
 
     print(render_template(sys.argv[1], sys.argv[2]))
 
+
+if __name__ == "__main__":
+    main()

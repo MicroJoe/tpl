@@ -17,18 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with tpl. If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 from tpl import tpl
 
 
-def usage():
-    print('usage: tpl <template_name> <language_name>')
-
-
 if __name__ == "__main__":
-
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(1)
-
-    tpl.run(sys.argv[1], sys.argv[2])
+    tpl.main()
