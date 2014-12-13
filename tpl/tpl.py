@@ -21,6 +21,7 @@
 import sys
 import os
 import json
+import getpass
 from datetime import datetime
 
 from jinja2 import Environment, FileSystemLoader
@@ -82,6 +83,7 @@ def main():
         context['author'] = conf['author']
     except FileNotFoundError:
         print('warning: JSON file ~/.tplrc not found', file=sys.stderr)
+        context['author'] = getpass.getuser()
     context['project'] = os.path.basename(os.getcwd())
 
     print(render_template(sys.argv[1], sys.argv[2]))
