@@ -37,14 +37,7 @@ LANGUAGES_DIR = os.path.join(ROOT_DIR, 'languages')
 USER_CONFIG = os.path.expanduser('~/.tplrc')
 
 
-context = {
-    'author': 'my_author',
-    'year': datetime.now().year,
-    'project': 'my_project'
-}
-
-
-def render_template(template_name, language_name):
+def render_template(template_name, language_name, context):
 
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 
@@ -71,11 +64,19 @@ def usage():
     print('usage: tpl <template_name> <language_name>')
 
 
-def main():
+def infer_context():
+    """Load the context based on current environment.
 
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(1)
+    Returns:
+        A dict containing all the contextual data
+
+    """
+
+    context = {
+        'author': 'my_author',
+        'year': datetime.now().year,
+        'project': 'my_project'
+    }
 
     try:
         with open(USER_CONFIG) as f:
@@ -84,9 +85,21 @@ def main():
     except FileNotFoundError:
         print('warning: JSON file ~/.tplrc not found', file=sys.stderr)
         context['author'] = getpass.getuser()
+
     context['project'] = os.path.basename(os.getcwd())
 
-    print(render_template(sys.argv[1], sys.argv[2]))
+    return context
+
+
+def main():
+
+    if len(sys.argv) < 3:
+        usage()
+        sys.exit(1)
+
+    context = infer_context()
+
+    print(render_template(sys.argv[1], sys.argv[2], context=context))
 
 
 if __name__ == "__main__":
