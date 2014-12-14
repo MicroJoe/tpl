@@ -26,6 +26,16 @@ from tpl import settings
 
 
 def load_language(language_name, languages_dir):
+    """Load a language description JSON file.
+
+    Args:
+        language_name (string) : name of the language (without .json extension)
+        languages_dir (string) : directory to look in for the JSON file
+
+    Returns:
+        The loaded language dict, or None if loading failed.
+
+    """
     uri = path.join(languages_dir, '{}.json'.format(language_name))
 
     try:
@@ -41,6 +51,16 @@ def load_language(language_name, languages_dir):
 
 
 def comment_inline(text, language):
+    """Generate a comment for the specified language on one line.
+
+    Args:
+        text (string) : text to put inside the comment
+        language (dict) : language description dictionnary
+
+    Returns:
+        A string containing the formatted comment.
+
+    """
     result = '{}{}{}\n'.format(
         language['format']['inline']['before'],
         text,
@@ -50,6 +70,16 @@ def comment_inline(text, language):
 
 
 def comment_multiline(text, language):
+    """Generate a comment for the specified language on multiple lines.
+
+    Args:
+        text (string) : text to put inside the comment
+        language (dict) : language description dictionnary
+
+    Returns:
+        A string containing the formatted comment.
+
+    """
     middle = '\n'.join([
         '{}{}'.format(
             language['format']['multiline']['while'],
