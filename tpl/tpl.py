@@ -30,32 +30,25 @@ from jinja2.exceptions import TemplateNotFound
 from tpl.comments import load_language, comment_multiline
 
 
-ROOT_DIR = os.path.dirname(__file__)
-TEMPLATES_DIR = os.path.join(ROOT_DIR, 'templates')
-LANGUAGES_DIR = os.path.join(ROOT_DIR, 'languages')
-
-USER_CONFIG = os.path.expanduser('~/.tplrc')
-
-
 def render_template(template_name, language_name, context):
 
-    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+    env = Environment(loader=FileSystemLoader(settings.TEMPLATES_DIR))
 
     try:
         template = env.get_template('{}.txt'.format(template_name))
     except TemplateNotFound:
         print('error: template file {} not found inside {}'
-              .format(template_name, TEMPLATES_DIR), file=sys.stderr)
+              .format(template_name, settings.TEMPLATES_DIR), file=sys.stderr)
         sys.exit(1)
 
     result = template.render(context)
 
     try:
-        lang = load_language(language_name, LANGUAGES_DIR)
+        lang = load_language(language_name, settings.LANGUAGES_DIR)
         return comment_multiline(result, lang)
     except FileNotFoundError:
         print('error: JSON description file for language {} not found inside {}'
-              .format(language_name, LANGUAGES_DIR),
+              .format(language_name, settings.LANGUAGES_DIR),
               file=sys.stderr)
         sys.exit(2)
 
@@ -79,7 +72,7 @@ def infer_context():
     }
 
     try:
-        with open(USER_CONFIG) as f:
+        with open(settings.USER_CONFIG) as f:
             conf = json.load(f)
         context['author'] = conf['author']
     except FileNotFoundError:
