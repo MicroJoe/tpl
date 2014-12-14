@@ -24,33 +24,9 @@ import json
 import getpass
 from datetime import datetime
 
-from jinja2 import Environment, FileSystemLoader
-from jinja2.exceptions import TemplateNotFound
+from tpl.template import render_template
 
-from tpl.comments import load_language, comment_multiline
-
-
-def render_template(template_name, language_name, context):
-
-    env = Environment(loader=FileSystemLoader(settings.TEMPLATES_DIR))
-
-    try:
-        template = env.get_template('{}.txt'.format(template_name))
-    except TemplateNotFound:
-        print('error: template file {} not found inside {}'
-              .format(template_name, settings.TEMPLATES_DIR), file=sys.stderr)
-        sys.exit(1)
-
-    result = template.render(context)
-
-    try:
-        lang = load_language(language_name, settings.LANGUAGES_DIR)
-        return comment_multiline(result, lang)
-    except FileNotFoundError:
-        print('error: JSON description file for language {} not found inside {}'
-              .format(language_name, settings.LANGUAGES_DIR),
-              file=sys.stderr)
-        sys.exit(2)
+from tpl import settings
 
 
 def usage():
@@ -61,7 +37,7 @@ def infer_context():
     """Load the context based on current environment.
 
     Returns:
-        A dict containing all the contextual data
+        A dict containing all the contextual data.
 
     """
 
