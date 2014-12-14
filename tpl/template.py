@@ -28,16 +28,17 @@ from tpl.comments import load_language, comment_multiline
 from tpl import settings
 
 
-def render_template(template_name, language_name, context):
-    """Render a template to comment.
+def render_template_text(template_name, context):
+    """Render a template to raw text.
 
     Args:
         template_name (string) : name of the template (without .txt extension)
-        language_name (string) : name of the language (without .json extension)
         context (dict) : context to be rendered inside the template
 
-    """
+    Returns:
+        A string containing the generated text.
 
+    """
     env = Environment(loader=FileSystemLoader(settings.TEMPLATES_DIR))
 
     try:
@@ -47,7 +48,20 @@ def render_template(template_name, language_name, context):
               .format(template_name, settings.TEMPLATES_DIR), file=sys.stderr)
         sys.exit(1)
 
-    result = template.render(context)
+    return template.render(context)
+
+
+def render_template_comment(template_name, language_name, context):
+    """Render a template to comment.
+
+    Args:
+        template_name (string) : name of the template (without .txt extension)
+        language_name (string) : name of the language (without .json extension)
+        context (dict) : context to be rendered inside the template
+
+    """
+
+    result = render_template_text(template_name, context)
 
     try:
         lang = load_language(language_name, settings.LANGUAGES_DIR)

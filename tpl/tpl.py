@@ -24,7 +24,7 @@ import json
 import getpass
 from datetime import datetime
 
-from tpl.template import render_template
+from tpl.template import render_template_comment
 
 from tpl import settings
 
@@ -68,7 +68,7 @@ def main():
 
     context = infer_context()
 
-    print(render_template(sys.argv[1], sys.argv[2], context=context))
+    print(render_template_comment(sys.argv[1], sys.argv[2], context=context))
 
 
 if __name__ == "__main__":
