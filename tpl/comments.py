@@ -20,13 +20,22 @@
 
 from os import path
 import json
+import sys
+
+from tpl import settings
 
 
 def load_language(language_name, languages_dir):
     uri = path.join(languages_dir, '{}.json'.format(language_name))
 
-    with open(uri) as f:
-        language = json.load(f)
+    try:
+        with open(uri) as f:
+            language = json.load(f)
+    except FileNotFoundError:
+        print('error: JSON description file for language {} not found inside {}'
+              .format(language_name, settings.LANGUAGES_DIR),
+              file=sys.stderr)
+        return
 
     return language
 

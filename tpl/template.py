@@ -46,7 +46,7 @@ def render_template_text(template_name, context):
     except TemplateNotFound:
         print('error: template file {} not found inside {}'
               .format(template_name, settings.TEMPLATES_DIR), file=sys.stderr)
-        sys.exit(1)
+        return
 
     return template.render(context)
 
@@ -62,12 +62,7 @@ def render_template_comment(template_name, language_name, context):
     """
 
     result = render_template_text(template_name, context)
+    lang = load_language(language_name, settings.LANGUAGES_DIR)
 
-    try:
-        lang = load_language(language_name, settings.LANGUAGES_DIR)
+    if result and lang:
         return comment_multiline(result, lang)
-    except FileNotFoundError:
-        print('error: JSON description file for language {} not found inside {}'
-              .format(language_name, settings.LANGUAGES_DIR),
-              file=sys.stderr)
-        sys.exit(2)

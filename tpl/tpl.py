@@ -68,7 +68,12 @@ def main():
 
     context = infer_context()
 
-    print(render_template_comment(sys.argv[1], sys.argv[2], context=context))
+    res = render_template_comment(sys.argv[1], sys.argv[2], context=context)
+
+    if not res:
+        sys.exit(1)
+
+    print(res)
 
 
 if __name__ == "__main__":
