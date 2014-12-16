@@ -62,11 +62,22 @@ def infer_context():
 
 def main():
 
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(1)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="write on stdout templates.")
+    parser.add_argument("TEMPLATE_NAME")
+    parser.add_argument("LANGUAGE_NAME")
+    parser.add_argument("-p", "--project", dest="project", help="project name")
+    parser.add_argument("-a", "--author", dest="author", help="author name")
+
+    args = parser.parse_args()
 
     context = infer_context()
+
+    if args.project:
+        context["project"] = args.project
+    if args.author:
+        context["author"] = args.author
 
     res = render_template_comment(sys.argv[1], sys.argv[2], context=context)
 
