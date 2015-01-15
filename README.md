@@ -15,7 +15,6 @@ You can add your own templates and languages using text files.
 
 Example usage:
 
-    :::console
     $ tpl
     usage: tpl <template_name> <language_name>
     $ tpl agpl c
@@ -34,7 +33,6 @@ This text file contains text and fields surrounded by double braces, like
 
 Example template:
 
-    :::text
     This file is part of {{ project }}.
     Copyright (C) {{ year }} {{ author }}.
 
@@ -46,7 +44,6 @@ You can add support for a specific language by creating a text file under the
 
 This JSON file describes the way comments are handled in the language:
 
-    :::javascript
     {
         "language": "your_language_name",
         "format": {
