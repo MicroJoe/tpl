@@ -23,10 +23,22 @@ The base program is handling only a few number of templates and languages which
 are listed below. Some languages may have the same comment format and therefore
 can be switched together because the result will stay the same (e.g, Python and
 Bash).
-.SS Availaible templates
-gpl, agpl
-.SS Availaible languages
-c, cpp, python, ocaml, bash, erlang
+
+Availaible templates: gpl, agpl
+
+Availaible languages: c, cpp, python, ocaml, bash, erlang
+.SS User configuration file
+
+In order to avoid to use the author option each time tpl is called, this
+software provides support of a minimalistic JSON configuration file named
+\fi~/.tplrc\fR.
+
+Here is an example of \fi~/.tplrc\fR file:
+
+    {"author": "Romain Porte"}
+
+Feel free to create one too and adapt it to your own needs.
+
 .SH AUTHOR
 Romain Porte <microjoe@mailoo.org>
 .SH COPYRIGHT
