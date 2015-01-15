@@ -22,6 +22,21 @@ Example usage:
      * ...
      */
 
+## Configuration
+
+In order to avoid to pass a `-a My Name` option to each call of tpl, the
+program handles a personal configuration file formatted in JSON. The file which
+will be looked for is named `~/.tplrc`.
+
+Here is an exemple of `~/.tplrc` file:
+
+    {
+        "author": "Romain Porte"
+    }
+
+At the moment this is the only supported parameter but more of them will be
+handled in this file as the code evolves.
+
 ## Adding your own templates
 
 You can add a template by creating a text file in the `templates/` directory.
